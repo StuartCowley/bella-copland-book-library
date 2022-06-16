@@ -7,7 +7,7 @@
     "prestart": "node scripts/create-database.js",
     "start": "nodemon -r dotenv/config index.js",
     "pretest": "node scripts/create-database.js test",
-    "test": "mocha tests/**/*.test.js",
+    "test": "mocha tests/**/*.js --exit --recursive --timeout 60000 --file ./tests/test-setup.js",
     "posttest": "node scripts/drop-database.js"
   },
   "repository": {
@@ -22,7 +22,8 @@
   "homepage": "https://github.com/isabellacopland/book-library#readme",
   "dependencies": {
     "express": "^4.18.1",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.20.1"
   },
   "devDependencies": {
     "chai": "^4.3.6",
