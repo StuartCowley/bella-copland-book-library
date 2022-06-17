@@ -30,6 +30,17 @@ describe('/books', () => {
         expect(newBookRecord.genre).to.equal('Young Adult');
         expect(newBookRecord.ISBN).to.equal('HJ5LDJF');
       });
+
+      it('errors if either title or author is missing', async() => {
+          const response = await request(app).post('/books').send({});
+          const newBookRecord = await Book.findByPk(response.body.id, {
+              raw: true,
+          });
+
+          expect(response.status).to.equal(400);
+          expect(response.body.errors.length).to.equal(2);
+          expect(newBookRecord).to.equal(null);
+      });
     });
   });
 
