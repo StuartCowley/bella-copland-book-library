@@ -4,7 +4,6 @@ const {
     updateItem,
     getItemsById,
     deleteItem,
-    getAllBooks,
 } = require('./helpers');
 
 const getBooks = (_, res) => getAllItems(res, 'book');
@@ -23,6 +22,5 @@ module.exports = {
     updateBook,
     getBookById,
     deleteBook,
-    getAllBooks,
 };
 
