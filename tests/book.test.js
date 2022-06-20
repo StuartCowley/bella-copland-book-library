@@ -94,7 +94,7 @@ describe('/books', () => {
         const response = await request(app).get('/books/12345');
 
         expect(response.status).to.equal(404);
-        expect(response.body.error).to.equal('The book could not be found.');
+        expect(response.body.error).to.equal('The book could not be found');
       });
     });
 
@@ -118,7 +118,7 @@ describe('/books', () => {
           .send({ ISBN: 'AD3IKNM' });
 
         expect(response.status).to.equal(404);
-        expect(response.body.error).to.equal('The book could not be found.');
+        expect(response.body.error).to.equal('The book could not be found');
       });
     });
 
@@ -135,7 +135,7 @@ describe('/books', () => {
       it('returns a 404 if the book does not exist', async () => {
         const response = await request(app).delete('/books/12345');
         expect(response.status).to.equal(404);
-        expect(response.body.error).to.equal('The book could not be found.');
+        expect(response.body.error).to.equal('The book could not be found');
       });
     });
   });

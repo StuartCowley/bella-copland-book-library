@@ -1,63 +1,26 @@
-const { Reader } = require('../models');
+const {
+    getAllItems,
+    createItem,
+    updateItem,
+    getItemsById,
+    deleteItem,
+} = require('./helpers');
 
-exports.create = (req, res) => {
-   const newReader = req.body;
+const getReaders = (_, res) => getAllItems(res, 'reader');
 
-   Reader
-    .create(newReader)
-    .then((newReaderCreated) => res.status(201).json(newReaderCreated))
-    .catch((error) => {
-        const errorMessages = error.errors.map((e) => e.message);
+const createReader = (req, res) => createItem(res, 'reader', req.body);
 
-        return res.status(400).json({ errors: errorMessages });
-    });
+const updateReader = (req, res) => updateItem(res, 'reader', req.body, req.params.id);
+
+const getReaderById = (req, res) => getItemsById(res, 'reader', req.params.id);
+
+const deleteReader = (req, res) => deleteItem(res, 'reader', req.params.id);
+
+module.exports = {
+    getReaders,
+    createReader,
+    updateReader,
+    getReaderById,
+    deleteReader,
 };
-
-exports.findAll = async (req, res) => {
-    const readers = await Reader.findAll();
-    res.status(200).json(readers);
-};
-
-exports.findByPk = async (req, res) => {
-    const { id } = req.params;
-
-    const reader = await Reader.findByPk(id);
-
-    if(!reader) {
-        res.status(404).json({ error: 'The reader could not be found.' });
-    } else {
-        res.status(200).json(reader);
-    }
-
-};
-
-exports.update = async (req, res) => {
-    const { id } = req.params;
-    const updateData = req.body;
-
-    const [ updatedRows ] = await Reader.update(updateData, {where: {id} });
-
-    if(!updatedRows) {
-        res.status(404).json({ error: 'The reader could not be found.' });
-    } else {
-        res.status(200).json(updatedRows)
-    }
-};
-
-exports.destroy = async (req, res) => {
-    const { id } = req.params;
-    
-    const deletedRows = await Reader.destroy({ where: { id }});
-
-    if(!deletedRows) {
-        res.status(404).json({ error: 'The reader could not be found.' });
-    } else {
-    res.status(204).json(deletedRows);
-    }
-};
-
-
-
-
-
 

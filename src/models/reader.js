@@ -26,7 +26,7 @@ module.exports = (connection, DataTypes) => {
         validate: {
           isLessThan8Characters(value) {
             if (value.length < 8)
-              throw new Error('Password needs to be longer than 8 characters');
+              throw new Error('Password cannot be empty and needs to be longer than 8 characters');
           },
         },
       },
