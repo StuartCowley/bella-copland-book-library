@@ -8,6 +8,10 @@ module.exports = (connection, DataTypes) => {
                   args: [true],
                   msg: 'Title cannot be empty',
               },
+              notNull: {
+                  args: [true],
+                  msg: 'Title cannot be empty'
+              },
           },
       },
       author: {
@@ -18,6 +22,10 @@ module.exports = (connection, DataTypes) => {
                   args: [true],
                   msg: 'Author cannot be empty',
               },
+              notNull: {
+                args: [true],
+                msg: 'Author cannot be empty'
+            },
           },
       },
       genre: DataTypes.STRING,
