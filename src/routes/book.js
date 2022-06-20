@@ -10,6 +10,8 @@ router.get('/', bookController.getBooks);
 
 router.get('/:id', bookController.getBookById);
 
+router.get('/', bookController.getAllBooks);
+
 router.patch('/:id', bookController.updateBook);
 
 router.delete('/:id', bookController.deleteBook);

@@ -27,7 +27,6 @@ describe('/books', () => {
         expect(response.body.title).to.equal('Harry Potter and the Order of the Phoenix');
         expect(newBookRecord.title).to.equal('Harry Potter and the Order of the Phoenix');
         expect(newBookRecord.author).to.equal('J.K Rowling');
-        expect(newBookRecord.genre).to.equal('Young Adult');
         expect(newBookRecord.ISBN).to.equal('HJ5LDJF');
       });
 

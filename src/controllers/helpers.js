@@ -66,16 +66,17 @@ const updateItem = (res, model, item, id) => {
 
 const getItemsById = (res, model, id) => {
     const Model = getModel(model);
-
-    return Model.findByPk(id).then((item) => {
-        if(!item) {
-            res.status(404).json(get404Error(model));
-        } else {
-            const itemWithoutPassword = removePassword(item.dataValues)
-            res.status(200).json(itemWithoutPassword);
-        }
+  
+    return Model.findByPk(id, { includes: Genre }).then((item) => {
+      if (!item) {
+        res.status(404).json(get404Error(model));
+      } else {
+        const itemWithoutPassword = removePassword(item.dataValues);
+  
+        res.status(200).json(itemWithoutPassword);
+      }
     });
-};
+  };
 
 const deleteItem = (res, model, id) => {
     const Model = getModel(model);
@@ -91,11 +92,20 @@ const deleteItem = (res, model, id) => {
     });
 };
 
+const getAllBooks = (res, model) => {
+    const Model = getModel(model);
+  
+    return Model.findAll({ include: Book }).then((items) => {
+      res.status(200).json(items);
+    });
+  };
+
 module.exports = {
     getAllItems,
     createItem,
     updateItem,
     getItemsById,
     deleteItem,
+    getAllBooks
 };
 
