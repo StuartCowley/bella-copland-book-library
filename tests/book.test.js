@@ -40,6 +40,40 @@ describe('/books', () => {
           expect(response.body.errors.length).to.equal(2);
           expect(newBookRecord).to.equal(null);
       });
+
+
+      xit('cannot create a book if it is not unique', async () => {
+        const response1 = await request(app)
+          .post('/books')
+          .send({ ISBN: 'AS3UGJB' });
+
+        const response2 = await request(app)
+          .post('/books')
+          .send({ ISBN: 'AS3UGJB' });
+
+        const newBookRecordOnFirstCall = await Book.findByPk(
+          response1.body.id,
+          {
+            raw: true,
+          }
+        );
+
+        const newBookRecordOnSecondCall = await Book.findByPk(
+          response2.body.id,
+          {
+            raw: true,
+          }
+        );
+
+        expect(response1.status).to.equal(201);
+        expect(response2.status).to.equal(400);
+
+        expect(response1.body.errors).to.equal(undefined);
+        expect(response2.body.errors.length).to.equal(1);
+
+        expect(newBookRecordOnFirstCall.author).to.equal('AS3UGJB');
+        expect(newBookRecordOnSecondCall).to.equal(null);
+      });
     });
   });
 

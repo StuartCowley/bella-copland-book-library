@@ -7,11 +7,11 @@ module.exports = (connection, DataTypes) => {
       validation: {
         notNull: {
           args: [true],
-          msg: 'We need a genre in so that we can create one',
+          msg: 'Genre cannot be empty',
         },
         notEmpty: {
           args: [true],
-          msg: 'We need a genre in so that we can create one',
+          msg: 'Genre cannot be empty',
         },
       },
     },
